@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 礼物说首页界面
+ * 礼物说首页界面 
  */
 public class HomePageActivity extends AppCompatActivity implements IMenuView{
 
