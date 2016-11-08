@@ -2,7 +2,11 @@ package com.example.lulu.administrator.liwushuohomework.dagger;
 
 import com.example.lulu.administrator.liwushuohomework.model.MenuApi;
 import com.example.lulu.administrator.liwushuohomework.presenter.IMenuPresenter;
-import com.example.lulu.administrator.liwushuohomework.presenter.MenuPresenter;
+import com.example.lulu.administrator.liwushuohomework.presenter.basePresenter.BasePresenter;
+import com.example.lulu.administrator.liwushuohomework.presenter.basePresenter.IBasePresenter;
+import com.example.lulu.administrator.liwushuohomework.presenter.menu.MenuPresenter;
+import com.example.lulu.administrator.liwushuohomework.presenter.selectPresenter.ISelectPresenter;
+import com.example.lulu.administrator.liwushuohomework.presenter.selectPresenter.SelectPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -27,5 +31,13 @@ public class AppMenuModule {
     @Provides
     public IMenuPresenter provideMenuPresenter(MenuApi menuApi){
         return new MenuPresenter(menuApi);
+    }
+    @Provides
+    public ISelectPresenter provideSelectProsenter(MenuApi menuApi){
+        return new SelectPresenter(menuApi);
+    }
+    @Provides
+    public IBasePresenter provideBasePresenter(MenuApi menuApi){
+        return new BasePresenter(menuApi);
     }
 }

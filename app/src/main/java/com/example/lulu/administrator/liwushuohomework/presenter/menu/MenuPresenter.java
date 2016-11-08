@@ -1,7 +1,8 @@
-package com.example.lulu.administrator.liwushuohomework.presenter;
+package com.example.lulu.administrator.liwushuohomework.presenter.menu;
 
 import com.example.lulu.administrator.liwushuohomework.bean.MenuBean;
 import com.example.lulu.administrator.liwushuohomework.model.MenuApi;
+import com.example.lulu.administrator.liwushuohomework.presenter.IMenuPresenter;
 import com.example.lulu.administrator.liwushuohomework.tools.LogUtils;
 import com.example.lulu.administrator.liwushuohomework.view.IMenuView;
 
@@ -18,7 +19,7 @@ import rx.schedulers.Schedulers;
  * 礼物说MVP模式中的P层
  * Created by Administrator on 2016/11/6.
  */
-public class MenuPresenter implements IMenuPresenter{
+public class MenuPresenter implements IMenuPresenter {
     private MenuApi menuApi;
     private IMenuView menuView;
 
@@ -34,6 +35,7 @@ public class MenuPresenter implements IMenuPresenter{
     @Override
     public void queryMenuBean() {
         final List<String> titles = new ArrayList<>();
+        final List<Integer> ids = new ArrayList<>();
         menuApi.queryMenuBena()
                 .flatMap(new Func1<MenuBean, Observable<MenuBean.DataBean.ChannelsBean>>() {
                     @Override
@@ -48,7 +50,9 @@ public class MenuPresenter implements IMenuPresenter{
 
                         String name = channelsBean.getName();
                         LogUtils.log(MenuPresenter.class,"--->"+name);
+                        int id = channelsBean.getId();
                         titles.add(name);
+                        ids.add(id);
                         return titles;
                     }
                 })
@@ -57,7 +61,7 @@ public class MenuPresenter implements IMenuPresenter{
                 .subscribe(new Observer<List<String>>() {
                     @Override
                     public void onCompleted() {
-                        menuView.refreshAdapter(titles);
+                        menuView.refreshAdapter(titles,ids);
                     }
 
                     @Override

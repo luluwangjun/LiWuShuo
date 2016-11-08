@@ -7,5 +7,5 @@ import java.util.List;
  * Created by Administrator on 2016/11/6.
  */
 public interface IMenuView {
-    void refreshAdapter(List<String> beanList);
+    void refreshAdapter(List<String> beanList,List<Integer> ids);
 }

@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 礼物说首页界面 
+ * 礼物说首页界面
  */
 public class HomePageActivity extends AppCompatActivity implements IMenuView{
 
@@ -56,16 +56,14 @@ public class HomePageActivity extends AppCompatActivity implements IMenuView{
     }
 
     @Override
-    public void refreshAdapter(List<String> beanList) {
+    public void refreshAdapter(List<String> beanList,List<Integer> integers) {
         LogUtils.log(HomePageActivity.class,"--->"+beanList);
         titles.addAll(beanList);
-        fragmentList.add(SelectFragment.newInstance("精选"));
+//        menuAdapter.notifyDataSetChanged();
+        fragmentList.add(SelectFragment.newInstance(String.valueOf(integers.get(0))));
         for (int i = 1, len = titles.size(); i < len; i++) {
-//            titles.addAll(beanList);
-//            titles.add(titles.get(i));
-            fragmentList.add(BaseFragment.newInstance(titles.get(i)));
+            fragmentList.add(BaseFragment.newInstance(String.valueOf(integers.get(i))));
         }
-
         menuAdapter.notifyDataSetChanged();
     }
 }
